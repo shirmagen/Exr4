@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Exr4.Views"
              xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
-             Height="450" Width="800"
+             Height="140" Width="300"
              Background="#f7f5a3">
     <Grid>
         <Grid.RowDefinitions>

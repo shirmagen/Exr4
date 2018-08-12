@@ -53,10 +53,15 @@ namespace Exr4.ViewModels
             if (_clicksCounter == _numOfRequiredClicks)
             {
                 _roundNumber++;
-
+                
                 if (_roundNumber == 3)
                 {
                     Message = "מזל טוב!";
+                    _roundNumber = 0;
+                }
+                else
+                {
+                    Message = "שלום";
                 }
             }
         }

@@ -1,12 +1,13 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using Caliburn.Micro;
 
 namespace Exr4.ViewModels
 {
-    public abstract class BaseWindowViewModel : Conductor<Screen>, IHandle<string>
+    public abstract class BaseWindowViewModel : Conductor<Screen>
     {
         protected IWindowManager _windowManager;
         protected IEventAggregator _eventAggregator;
-        private string _message;
+        protected string _message;
 
         public string Message
         {
@@ -14,8 +15,8 @@ namespace Exr4.ViewModels
             set
             {
                 _message = value;
-                NotifyOfPropertyChange(() => Message);
                 MessageChanged(Message);
+                NotifyOfPropertyChange(() => Message);
             }
         }
 
@@ -23,17 +24,12 @@ namespace Exr4.ViewModels
         {
             _windowManager = windowManager;
             _eventAggregator = eventAggregator;
-            Message = "שלום";
+            _eventAggregator.Subscribe(this);
         }
 
         public void MessageChanged(string message)
         {
             _eventAggregator.PublishOnUIThread(message);
-        }
-
-        public void Handle(string message)
-        {
-            Message = message;
         }
     }
 }

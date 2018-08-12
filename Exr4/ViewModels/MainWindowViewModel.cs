@@ -9,16 +9,15 @@ namespace Exr4.ViewModels
         private FirstWindowViewModel _firstWindow;
         private SecondWindowViewModel _secondWindow;
         private ThirdWindowViewModel _thirdWindow;
-        private string _message;
+        private string _labelText;
 
-        public new string Message
+        public string LabelText
         {
-            get => _message;
+            get => _labelText;
             set
             {
-                _message = value;
-                NotifyOfPropertyChange(() => Message);
-                DeactivateItem(ActiveItem, true);
+                _labelText = value;
+                NotifyOfPropertyChange(() => LabelText);
             }
         }
 
@@ -28,7 +27,7 @@ namespace Exr4.ViewModels
             _firstWindow = new FirstWindowViewModel(_windowManager, _eventAggregator);
             _secondWindow = new SecondWindowViewModel(_windowManager, _eventAggregator);
             _thirdWindow = new ThirdWindowViewModel(_windowManager, _eventAggregator);
-            _eventAggregator.Subscribe(_firstWindow.Message);
+            Message = "שלום";
         }
 
         public void OpenFirstWindow()
@@ -44,6 +43,12 @@ namespace Exr4.ViewModels
         public void OpenThirdWindow()
         {
             ActivateItem(_thirdWindow);
+        }
+
+        public void Handle(string message)
+        {
+            LabelText = message;
+            DeactivateItem(ActiveItem, true);
         }
     }
 }
